@@ -6,9 +6,9 @@ I used the this [project](https://github.com/aws-samples/ask-around-me/) as a te
 
 ## Prerequisites
 
-* AWS SAM CLI installed
-* NodeJS 12.x installed
-* [Vue.js and Vue CLI installed](https://vuejs.org/v2/guide/installation.html)
+* [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) installed (Tested using v1.23.0)
+* [NodeJS 12.x](https://nodejs.org/en/download/) installed (14.x is available, but I tested with 12.x)
+* [Vue.js Dev Tools and Vue CLI](https://vuejs.org/v2/guide/installation.html) installed
 * Sign up for an [Auth0 account](https://auth0.com/)
 
 ## Auth0 configuration
