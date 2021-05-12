@@ -1,0 +1,5 @@
+{
+  "domain": "corbettweinberg.us.auth0.com",
+  "clientId": "ZxJjV4p1NCdizQkb3osFJjEvED1MXmAF",
+  "audience": "https://auth0-jwt-authorizer"
+}

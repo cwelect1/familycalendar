@@ -1,0 +1,164 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: Family Calendar Single Page Webapp Backend
+
+Parameters:
+  EventsTableName:
+    Type: String
+    Description: Name of Events DynamoDB table
+    Default: fcEvents
+
+  Auth0issuer:
+    Type: String
+    Description: The issuer URL from your Auth0 account.
+    Default: https://corbettweinberg.us.auth0.com/
+
+Globals:
+  Function:
+    Timeout: 5
+    Runtime: nodejs12.x
+    Tags:
+      Application: FamilyCalendar
+
+Resources:
+  # HTTP API
+  MyApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      # HTTP API authorizer - see https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapiauth.html
+      Auth:
+        Authorizers:
+          MyAuthorizer:
+            JwtConfiguration:
+              issuer: !Ref Auth0issuer
+              audience:
+                - https://auth0-jwt-authorizer
+            IdentitySource: "$request.header.Authorization"
+        DefaultAuthorizer: MyAuthorizer
+
+      # CORS configuration - this is open for development only and should be restricted in prod.
+      # See https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-httpapi-httpapicorsconfiguration.html   
+      CorsConfiguration:
+        AllowMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        AllowHeaders:
+          - "*"   
+        AllowOrigins: 
+          - "*"   
+
+  ## Lambda functions
+  PostEventFunction: 
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: events/post/
+      Handler: app.handler
+      MemorySize: 128
+      Description: Post new event
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref EventsTableName
+      Environment:
+        Variables:
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+          TableName: !Ref EventsTableName
+      Events:
+        PostEvent:
+          Type: HttpApi
+          Properties:
+            Path: /events
+            Method: post
+            ApiId: !Ref MyApi
+
+  GetEventsFunction: 
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: events/get/
+      Handler: app.handler
+      MemorySize: 2048
+      Description: Returns list of events
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref EventsTableName
+      Environment:
+        Variables:
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+          TableName: !Ref EventsTableName
+      Events:
+        GetEvents:
+          Type: HttpApi
+          Properties:
+            Path: /events
+            Method: get
+            ApiId: !Ref MyApi
+
+  PutEventFunction: 
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: events/put/
+      Handler: app.handler
+      MemorySize: 128
+      Description: Put event
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref EventsTableName
+      Environment:
+        Variables:
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+          TableName: !Ref EventsTableName
+      Events:
+        PutEvent:
+          Type: HttpApi
+          Properties:
+            Path: /events
+            Method: put
+            ApiId: !Ref MyApi
+
+  DeleteEventFunction: 
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: events/delete   
+      Handler: app.handler
+      MemorySize: 128
+      Description: Delete a single event      
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref EventsTableName
+      Environment:
+        Variables:
+          AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+          TableName: !Ref EventsTableName
+      Events:
+        DeleteEvent:
+          Type: HttpApi
+          Properties:
+            Path: /events
+            Method: delete
+            ApiId: !Ref MyApi  
+
+  ## DynamoDB table
+  EventsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref EventsTableName
+      AttributeDefinitions:
+      - AttributeName: event_id
+        AttributeType: N
+      - AttributeName: event_date
+        AttributeType: S
+      KeySchema:
+      - AttributeName: event_id
+        KeyType: HASH
+      - AttributeName: event_date
+        KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST    
+      StreamSpecification:
+        StreamViewType: NEW_AND_OLD_IMAGES       
+
+Outputs:
+  APIendpoint:
+    Description: "HTTP API endpoint URL"
+    Value: !Sub "https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com"
