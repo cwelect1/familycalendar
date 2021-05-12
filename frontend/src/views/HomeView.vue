@@ -32,7 +32,7 @@
 
     <!-- Events list for authenticated users -->
     <v-container class="pa-0 ma-0" id="auth-view" v-if="$auth.isAuthenticated">
-      
+      <div class="ma-2">There are {{ events.length }} events!</div>
     </v-container>
 
     <!-- Loading spinner -->
@@ -58,7 +58,6 @@
     </v-container>
     <v-container class="pa-0 ma-0" v-if="events.length > 0">
       <v-container class="pa-0 ma-0" v-bind:key="index" v-for="(event, index) in events">
-        <div class="ma-2">There are {{ events.length }} events!</div>
         <Event v-bind:event="event"/>
       </v-container>
     </v-container>
