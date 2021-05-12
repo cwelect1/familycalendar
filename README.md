@@ -12,7 +12,7 @@ I used the this [project](https://github.com/aws-samples/ask-around-me/) as a te
 * Sign up for an [Auth0 account](https://auth0.com/)
 
 ## Auth0 configuration
-These instruction are based on running the app locally.
+These instruction are based on running the app locally.</br>
 If you host on any other server (e.g. Production), you need to add that URL to the fields noted in step 5.
 
 1. Sign up for an Auth0 account at https://auth0.com. 
