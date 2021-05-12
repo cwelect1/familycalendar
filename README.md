@@ -16,12 +16,12 @@ These instruction are based on running the app locally.</br>
 If you host on any other server (e.g. Production), you need to add that URL to the fields noted in step 5.
 
 1. Sign up for an Auth0 account at https://auth0.com. 
-2. Select Applications from the left hand nav, then click the **+Create Application** button.
-3. Enter the name of your app e.g. *Family Calendar* and select *Single Page Web Applications* for application type. Choose **Create**.
-4. Select the *Settings* tab, and note the `Domain` and `ClientID` for installation of the application backend and frontend.
-5. Under *Allowed Callback URLs*, *Allowed Logout URLs* and *Allowed Web Origins* and *Allowed Origins (CORS)*, enter **http://localhost:8080**. Choose **Save Changes**.
-6. Select APIS from the menu, then choose **Create API**.
-7. Enter the name *Ask Around Me*, and set the *Identifier* to **https://auth0-jwt-authorizer**. Choose **Create**.
+2. Select **Applications** from the left hand nav, then click the **+Create Application** button.
+3. Enter the name of your app e.g. ***Family Calendar*** and select ***Single Page Web Applications*** for application type. Choose **Create**.
+4. Select the ***Settings*** tab, and note the `Domain` and `ClientID` for installation of the application backend and frontend.
+5. Under ***Allowed Callback URLs***, ***Allowed Logout URLs*** and ***Allowed Web Origins*** and ***Allowed Origins (CORS)***, enter **http://localhost:8080**. Choose **Save Changes**.
+6. Select **APIS** from the menu, then choose **Create API**.
+7. Enter the name *Family Calendar*, and set the *Identifier* to **https://auth0-jwt-authorizer**. Choose **Create**.
 
 Auth0 is now configured for you to use. The backend uses the `domain` value to validate the JWT token. The frontend uses the identifier (also known as the audience), together with the *Client ID* to validate authentication for this single application. For more information, see the [Auth0 documentation](https://auth0.com/docs/api/authentication).
 
