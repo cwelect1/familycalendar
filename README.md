@@ -29,7 +29,7 @@ Auth0 is now configured for you to use. The backend uses the `domain` value to v
 
 Clone the repo onto your local development machine using `git clone`.
 
-### Installing the backend application
+### Build and Deploy Backend
 
 cd to the 'backend' folder and run:
 ```
@@ -46,9 +46,7 @@ When prompted for parameters, enter:
 
 This takes a minute or 2 to deploy. At the end of the deployment, note the `APIendpoint` value, as you need this in the frontend installation.
 
-### Installing the frontend application
-
-The frontend code is saved in the `frontend` subdirectory. 
+### Build and Deploy Frontend (locally)
 
 1. Before running, you need to set environment variables in the `src\main.js` file:
 
@@ -60,7 +58,7 @@ The frontend code is saved in the `frontend` subdirectory.
 - clientId: a unique string identifying the client application.
 - audience: set to https://auth0-jwt-authorizer.
 
-3. Change directory into the frontend code, and run the NPM installation:
+3. Run the NPM installation:
 
 ```
 cd ../frontend
@@ -71,6 +69,7 @@ npm install
 ```
 // Build the production distro
 npm run build
+
 // Run server locally
 npm run serve
 ```
