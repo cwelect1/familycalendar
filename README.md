@@ -27,7 +27,7 @@ Auth0 is now configured for you to use. The backend uses the `domain` value to v
 
 ## Installation Instructions
 
-1. Clone the repo onto your local development machine using `git clone`.
+Clone the repo onto your local development machine using `git clone`.
 
 ### Installing the backend application
 
