@@ -8,8 +8,5 @@
   },
   "keywords": [],
   "author": "Corbett Weinberg",
-  "license": "MIT-0",
-  "dependencies": {
-    "aws-sdk": "^2.658.0"
-  }
+  "license": "MIT-0"
 }

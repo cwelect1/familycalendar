@@ -22,26 +22,9 @@
             Edit
           </v-btn>
         </div>
-        <!-- <v-spacer></v-spacer> -->
       </v-card-actions>
       <v-divider class="mx-4"></v-divider> 
     </v-card> 
-
-    <!-- Popup star rating dialog for answering Event -->
-    <v-dialog v-model="dialog" persistent max-width="290">
-      <v-card>
-        <v-card-title class="headline">Edit Event:</v-card-title>
-        <v-card-text>
-          <!-- <div class="my-1 subtitle-2">Your rating: </div> -->
-          
-        </v-card-text>            
-        <v-card-actions> 
-          <v-spacer></v-spacer>
-          <v-btn :disabled="saving===true" color="success" text @click="submitDialog('star')">Submit</v-btn>
-          <v-btn :disabled="saving===true" color="error" text @click="dialog=false">Cancel</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
 
   </v-container>
 </template>
@@ -54,8 +37,6 @@ export default {
   props: ['event'],
   data: function () {   
     return {
-      dialog: false,
-      mapDialog: false,
       saving: false,
       currentEvent: {}
     }
@@ -87,14 +68,7 @@ export default {
       this.saving = false
       this.reset()
     },
-    openDialog(event) {
-      console.log(event)
-      this.currentEvent = event
-      this.dialog = true
-    },
     reset () {
-      //this.$router.push('/')
-      //this.$forceUpdate();
       this.updateResults()
     },
     async updateResults() {

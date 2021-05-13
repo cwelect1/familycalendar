@@ -12,8 +12,7 @@
 
     data: function () {
       return {
-        appName: this.$appName,
-        drawer: null
+        appName: this.$appName
       }
     },
   }

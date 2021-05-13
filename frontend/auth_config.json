@@ -1,5 +1,5 @@
 {
-  "domain": "<your domain when you setup Auth0>.us.auth0.com",
-  "clientId": "<your client ID>",
+  "domain": "corbettweinberg.us.auth0.com",
+  "clientId": "ZxJjV4p1NCdizQkb3osFJjEvED1MXmAF",
   "audience": "https://auth0-jwt-authorizer"
 }

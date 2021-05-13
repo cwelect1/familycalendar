@@ -8,7 +8,7 @@
           <v-list-item-avatar color="orange"></v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title class="headline">Welcome!</v-list-item-title>
-            <v-list-item-subtitle>Login to start adding events</v-list-item-subtitle>
+            <v-list-item-subtitle>Login or Sign up to start adding events</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
     
